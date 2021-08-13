@@ -3,6 +3,13 @@ import SwiftUI
 struct PokemonDescriptionView: View {
     let pokemon: Pokemon
 
+    private var attributedText: AttributedString {
+        guard let text = try? AttributedString(markdown: "See [More](https://pokemondb.net/pokedex/\(pokemon.name))")
+        else { return "" }
+
+        return text
+    }
+
     var body: some View {
         VStack(alignment: .leading) {
             Text("**\(pokemon.name.capitalized)**")
@@ -11,10 +18,7 @@ struct PokemonDescriptionView: View {
                 .font(.system(size: 18))
                 .foregroundColor(.gray)
 
-            // Markdown links only work with string literals.
-            Text("See [More](https://pokemondb.net/pokedex/national)")
-            // You cannot use string interpolation ...
-            //Text("See [More](https://pokemondb.net/pokedex/\(pokemon.name))")
+            Text(attributedText)
         }
     }
 }
