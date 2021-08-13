@@ -8,7 +8,7 @@ struct PokemonResponse: Decodable {
 }
 
 struct Pokemon: Decodable, Identifiable {
-    private static var totalFound = 0
+    static var totalFound = 0
 
     let id: Int
     let name: String
