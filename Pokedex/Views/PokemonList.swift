@@ -12,7 +12,7 @@ struct PokemonList: View {
                 AsyncImage(
                     url: pokemon.url,
                     scale: 1.0,
-                    transaction: Transaction(animation: .easeIn(duration: 0.5))
+                    transaction: Transaction(animation: .spring())
                 ) { phase in
                     switch phase {
                     case .success(let image):
