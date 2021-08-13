@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-var cache: [URL: Image] = [:]
+//var cache: [URL: Image] = [:]
 
 struct CacheAsyncImage<Content>: View where Content: View {
 
@@ -15,6 +15,8 @@ struct CacheAsyncImage<Content>: View where Content: View {
     private let scale: CGFloat
     private let transaction: Transaction
     private let content: (AsyncImagePhase) -> Content
+
+    @AppStorage var cache: Data?
 
     init(
         url: URL,
@@ -26,12 +28,13 @@ struct CacheAsyncImage<Content>: View where Content: View {
         self.scale = scale
         self.transaction = transaction
         self.content = content
+        _cache = AppStorage(url.absoluteString)
     }
 
     @ViewBuilder var body: some View {
 
-        if let cached = cache[url] {
-            content(.success(cached))
+        if let cached = cache {
+            content(.success(cached.toImage()))
         } else {
             let _ = print("request \(url.absoluteString)")
             AsyncImage(
@@ -53,7 +56,7 @@ struct CacheAsyncImage<Content>: View where Content: View {
         return content(phase)
             .onAppear {
                 if case .success(let image) = phase {
-                    cache[url] = image
+                    cache = image.snapshot().pngData()
                 }
             }
     }
@@ -75,5 +78,32 @@ struct CacheAsyncImage_Previews: PreviewProvider {
                 fatalError()
             }
         }
+    }
+}
+
+extension Image {
+    func snapshot() -> UIImage {
+        let controller = UIHostingController(rootView: self)
+        let view = controller.view
+
+        let targetSize = controller.view.intrinsicContentSize
+        view?.bounds = CGRect(origin: .zero, size: targetSize)
+        view?.backgroundColor = .clear
+
+        let renderer = UIGraphicsImageRenderer(size: targetSize)
+
+        return renderer.image { _ in
+            view?.drawHierarchy(in: controller.view.bounds, afterScreenUpdates: true)
+        }
+    }
+}
+
+extension Data {
+    func toImage() -> Image {
+        guard let uiImage = UIImage(data: self) else {
+            return Image(systemName: "star")
+        }
+
+        return Image(uiImage: uiImage)
     }
 }
