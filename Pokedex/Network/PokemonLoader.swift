@@ -42,7 +42,6 @@ class PokemonLoader: ObservableObject {
 
 
     func getMorePokemons() async -> [Pokemon] {
-        self.offset += self.limit
         
         let url = URL(string: "https://pokeapi.co/api/v2/pokemon/?limit=\(limit)&offset=\(offset)")!
         guard let (data, response) = try? await URLSession.shared.data(from: url)
@@ -53,6 +52,8 @@ class PokemonLoader: ObservableObject {
 
         guard let decoded = try? JSONDecoder().decode(PokemonResponse.self, from: data)
         else { return [] }
+
+        self.offset += self.limit
 
         return decoded.results
     }
