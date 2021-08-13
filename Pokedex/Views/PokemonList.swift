@@ -9,7 +9,7 @@ struct PokemonList: View {
 
         List {
             ForEach(loader.pokemonData) { pokemon in
-                AsyncImage(
+                CacheAsyncImage(
                     url: pokemon.url,
                     scale: 1.0,
                     transaction: Transaction(animation: .spring())
