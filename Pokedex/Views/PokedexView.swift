@@ -24,12 +24,6 @@ struct PokedexView: View {
                         // Enable Pull to refresh
                         await loader.load()
                     }
-                    .alert(isPresented: $loader.error) {
-                        Alert(
-                            title: Text("Error"),
-                            message: Text("Please try again later")
-                        )
-                    }
             }
             
         }

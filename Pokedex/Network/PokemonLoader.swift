@@ -8,7 +8,6 @@ enum PokemonError: Error {
 
 class PokemonLoader: ObservableObject {
     @Published private(set) var pokemonData: [Pokemon] = []
-    @Published var error = false
 
     private let urlSession = URLSession(configuration: .default)
     private let limit = 5
@@ -41,7 +40,6 @@ class PokemonLoader: ObservableObject {
             pokemonData += try await getPokemons()
         } catch {
             print("error: ",error)
-            self.error = true
         }
     }
 
@@ -52,7 +50,6 @@ class PokemonLoader: ObservableObject {
             pokemonData = try await getPokemons()
         } catch {
             print("error: ",error)
-            self.error = true
         }
     }
 }
