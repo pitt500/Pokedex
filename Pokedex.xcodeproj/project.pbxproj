@@ -44,6 +44,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B5462ED926C6EEF6005B46D0 /* Cache */ = {
+			isa = PBXGroup;
+			children = (
+				B592CB3226C6AD730045039B /* CacheAsyncImage.swift */,
+			);
+			path = Cache;
+			sourceTree = "<group>";
+		};
 		B5F853E626860F1B00987A0C = {
 			isa = PBXGroup;
 			children = (
@@ -63,6 +71,7 @@
 		B5F853F126860F1B00987A0C /* Pokedex */ = {
 			isa = PBXGroup;
 			children = (
+				B5462ED926C6EEF6005B46D0 /* Cache */,
 				B5F8540E2686132E00987A0C /* Views */,
 				B5F8540B2686127600987A0C /* Model */,
 				B5F854082686123800987A0C /* Network */,
@@ -104,7 +113,6 @@
 				B5F854112686134A00987A0C /* PokemonList.swift */,
 				B5F854132686135200987A0C /* ErrorView.swift */,
 				B53AC0F52687BB60009A4FFA /* PokedexView.swift */,
-				B592CB3226C6AD730045039B /* CacheAsyncImage.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
