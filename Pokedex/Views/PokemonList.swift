@@ -45,7 +45,7 @@ struct PokemonList: View {
                 .listRowSeparator(.hidden)
                 .task {
                     if pokemon == loader.pokemonData.last {
-                        loader.pokemonData += await loader.getMorePokemons()
+                        await loader.loadMorePokemons()
                     }
                 }
             }
