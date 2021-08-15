@@ -12,20 +12,17 @@ struct PokedexView: View {
 
     var body: some View {
         NavigationView {
-            ZStack {
-                PokemonList(loader: loader)
-                    .navigationTitle("PokeDex")
-                    .task {
-                        // Task is the same like onAppear, but works with async tasks.
-                        // also it cancels the task when the view disappears.
-                        await loader.load()
-                    }
-                    .refreshable {
-                        // Enable Pull to refresh
-                        await loader.load()
-                    }
+            PokemonList(loader: loader)
+            .navigationTitle("PokeDex")
+            .task {
+                // Task is the same like onAppear, but works with async tasks.
+                // also it cancels the task when the view disappears.
+                await loader.load()
             }
-            
+            .refreshable {
+                // Enable Pull to refresh
+                await loader.load()
+            }
         }
 
     }
