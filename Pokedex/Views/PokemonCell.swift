@@ -9,15 +9,12 @@ import SwiftUI
 
 struct PokemonCell: View {
     let pokemon: Pokemon
-    @ObservedObject var loader: PokemonLoader
     private let imageWidth = 110.0
     private let cellHeight = 130.0
 
     var body: some View {
-        AsyncImage(
-            url: pokemon.url,
-            scale: 1.0,
-            transaction: Transaction(animation: .spring())
+        CacheAsyncImage(
+            url: pokemon.url
         ) { phase in
             switch phase {
             case .success(let image):
@@ -48,19 +45,13 @@ struct PokemonCell: View {
         .frame(height: cellHeight)
         .padding()
         .listRowSeparator(.hidden)
-        .task {
-            if pokemon == loader.pokemonData.last {
-                await loader.loadMorePokemons()
-            }
-        }
     }
 }
 
 struct PokemonCell_Previews: PreviewProvider {
     static var previews: some View {
-        PokemonCell(
-            pokemon: Pokemon.sample,
-            loader: PokemonLoader()
-        )
+        PokemonCell(pokemon: Pokemon.sample)
     }
 }
+
+

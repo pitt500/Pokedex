@@ -10,7 +10,7 @@ class PokemonLoader: ObservableObject {
     @Published private(set) var pokemonData: [Pokemon] = []
 
     private let urlSession = URLSession(configuration: .default)
-    private let limit = 5
+    private let limit = 10
     private var offset = 0
 
     func restartPagination() {
@@ -31,23 +31,17 @@ class PokemonLoader: ObservableObject {
 
         self.offset += self.limit
 
-        //print(decoded.results.map(\.name))
         return decoded.results
     }
 
-    @MainActor func loadMorePokemons() async {
+    @MainActor func load(isFirstTime: Bool = false) async {
+        if isFirstTime {
+            restartPagination()
+            pokemonData.removeAll()
+        }
+
         do {
             pokemonData += try await getPokemons()
-        } catch {
-            print("error: ",error)
-        }
-    }
-
-    @MainActor func load() async {
-        restartPagination()
-
-        do {
-            pokemonData = try await getPokemons()
         } catch {
             print("error: ",error)
         }

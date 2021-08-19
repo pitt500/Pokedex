@@ -6,7 +6,12 @@ struct PokemonList: View {
     var body: some View {
         List {
             ForEach(loader.pokemonData) { pokemon in
-                PokemonCell(pokemon: pokemon, loader: loader)
+                PokemonCell(pokemon: pokemon)
+                .task {
+                    if pokemon == loader.pokemonData.last {
+                        await loader.load()
+                    }
+                }
             }
         }
     }
