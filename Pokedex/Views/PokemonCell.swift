@@ -13,7 +13,7 @@ struct PokemonCell: View {
     private let cellHeight = 130.0
 
     var body: some View {
-        CacheAsyncImage(
+        AsyncImage(
             url: pokemon.url
         ) { phase in
             switch phase {
