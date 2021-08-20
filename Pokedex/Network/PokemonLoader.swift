@@ -34,8 +34,8 @@ class PokemonLoader: ObservableObject {
         return decoded.results
     }
 
-    @MainActor func load(isFirstTime: Bool = false) async {
-        if isFirstTime {
+    @MainActor func load(restart: Bool = false) async {
+        if restart {
             restartPagination()
             pokemonData.removeAll()
         }

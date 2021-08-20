@@ -17,11 +17,11 @@ struct PokedexView: View {
             .task {
                 // Task is the same like onAppear, but works with async tasks.
                 // also it cancels the task when the view disappears.
-                await loader.load(isFirstTime: true)
+                await loader.load(restart: true)
             }
             .refreshable {
                 // Enable Pull to refresh
-                await loader.load(isFirstTime: true)
+                await loader.load(restart: true)
             }
         }
 
