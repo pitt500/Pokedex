@@ -44,17 +44,11 @@ struct CacheAsyncImage<Content>: View where Content: View {
     }
 
     func cacheAndRender(phase: AsyncImagePhase) -> some View {
-        //This will modify the state during view updates
-//        if case .success(let image) = phase {
-//            cache[url] = image
-//        }
+        if case .success(let image) = phase {
+            ImageCache[url] = image
+        }
 
         return content(phase)
-            .onAppear {
-                if case .success(let image) = phase {
-                    ImageCache[url] = image
-                }
-            }
     }
 }
 
