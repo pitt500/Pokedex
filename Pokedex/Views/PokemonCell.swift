@@ -1,9 +1,9 @@
-//
-//  PokemonCell.swift
-//  PokemonCell
-//
-//  Created by Pedro Rojas on 15/08/21.
-//
+/*
+ This source file is part of https://github.com/pitt500/Pokedex/
+
+ Copyright (c) 2023 Pedro Rojas and project authors
+ Licensed under MIT License
+*/
 
 import SwiftUI
 

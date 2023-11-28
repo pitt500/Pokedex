@@ -1,9 +1,9 @@
-//
-//  PokedexView.swift
-//  AsyncAwaitDemo
-//
-//  Created by Pedro Rojas on 26/06/21.
-//
+/*
+ This source file is part of https://github.com/pitt500/Pokedex/
+
+ Copyright (c) 2023 Pedro Rojas and project authors
+ Licensed under MIT License
+*/
 
 import SwiftUI
 

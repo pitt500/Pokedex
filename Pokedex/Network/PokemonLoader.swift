@@ -6,6 +6,13 @@ enum PokemonError: Error {
     case noData
 }
 
+/*
+ This source file is part of https://github.com/pitt500/Pokedex/
+
+ Copyright (c) 2023 Pedro Rojas and project authors
+ Licensed under MIT License
+*/
+
 class PokemonLoader: ObservableObject {
     @Published private(set) var pokemonData: [Pokemon] = []
 
